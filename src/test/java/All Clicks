@@ -1,0 +1,57 @@
+//Clear abd
+adb shell pm clear io.appium.uiautomator2.server
+adb shell pm clear io.appium.uiautomator2.server.test
+
+
+//  Terminate Method Call
+        Thread.sleep(2000);
+        String appPackage = "vidfo.video.player.videoplayer";
+        terminateApp(driver, appPackage);
+        System.out.println("Test Case 5 ->> Terminate ");
+
+//  Onboarding Clicks
+        System.out.println("Click Start Over Onboarding Screen");
+                driver.findElement(By.xpath("//android.widget.Button[@resource-id=\"vidfo.video.player.videoplayer:id/onBoardingNextBtn\"]")).click();
+                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                driver.findElement(By.xpath("//android.widget.Button[@resource-id=\"vidfo.video.player.videoplayer:id/onBoardingNextBtn\"]")).click();
+                driver.manage().timeouts().implicitlyWait(500, TimeUnit.SECONDS);
+                System.out.println("User Now Over Home Screen ");
+                Thread.sleep(3000);
+
+//  Permission Revoke
+if (!isFirstMethodExecuted) {
+            // Check if the first method was not executed
+            System.out.println("First method has not been executed...");
+            //All Permissions Remove
+            revokeAllPermissions("vidfo.video.player.videoplayer");
+        }
+        else {
+            System.out.println("Else Condition Working");
+            revokeAllPermissions("vidfo.video.player.videoplayer");
+            try {
+                Thread.sleep(2000);
+                StartApp();
+                System.out.println("Test Case 2 -> App Open");
+            } catch (IOException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+//  System All Button
+    TouchAction action = new TouchAction(driver);
+    action.tap(PointOption.point(550, 1950)).perform();
+
+//  System Deny Button
+    TouchAction action = new TouchAction(driver);
+    action.tap(PointOption.point(510, 2111)).perform();
+
+//  Rational Dialogue With Allow Click
+    driver.findElement(By.xpath("//android.widget.Button[@resource-id=\"vidfo.video.player.videoplayer:id/grantPermission\"]")).click();
+
+//  Rational Dialogue With Deny Click
+
+
+//  Music Bottom Click
+    driver.findElement(By.xpath("//android.widget.TextView[@resource-id=\"vidfo.video.player.videoplayer:id/navigation_bar_item_small_label_view\" and @text=\"Music\"]")).click();
+
+//
